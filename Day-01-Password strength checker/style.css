@@ -1,0 +1,428 @@
+/* Sleek Interface - Neumorphism (Soft UI) Real-Time Password Strength Checker */
+
+:root {
+  --bg-color: #e0e5ec;
+  --text-heading: #2d3436;
+  --text-main: #44475a;
+  --text-muted: #8892a0;
+  --shadow-light: #ffffff;
+  --shadow-dark: #a3b1c6;
+  --shadow-inset: #b8b9be;
+  --color-weak: #ff7675;
+  --color-medium: #fdcb6e;
+  --color-strong: #55efc4;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Centered Highlighted Square Container - Sleek Interface Card */
+.app-container {
+  background-color: var(--bg-color);
+  width: 450px;
+  max-width: 100%;
+  border-radius: 40px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  box-shadow: 12px 12px 24px var(--shadow-dark), -12px -12px 24px var(--shadow-light);
+  transition: all 0.3s ease;
+}
+
+/* Header & Title */
+.header-area {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.app-title {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--text-heading);
+  letter-spacing: -0.03em;
+}
+
+.app-subtitle {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-main);
+  opacity: 0.5;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-top: 6px;
+}
+
+/* Form Styles */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.form-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding-left: 16px;
+  opacity: 0.7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Pressed-in Neumorphic Input - Sleek Interface */
+.neumorphic-input {
+  width: 100%;
+  height: 48px;
+  background-color: var(--bg-color);
+  border: none;
+  outline: none;
+  border-radius: 16px;
+  padding: 0 20px;
+  font-size: 14px;
+  color: var(--text-heading);
+  box-shadow: inset 6px 6px 12px var(--shadow-inset), inset -6px -6px 12px var(--shadow-light);
+  transition: all 0.2s ease-in-out;
+}
+
+.neumorphic-input::placeholder {
+  color: #a0a6b5;
+  font-size: 13px;
+}
+
+.neumorphic-input:focus {
+  box-shadow: inset 7px 7px 14px var(--shadow-inset), inset -7px -7px 14px var(--shadow-light);
+}
+
+/* Error state & Shake animation */
+.neumorphic-input.input-error {
+  box-shadow: inset 5px 5px 10px #d8a8a8, inset -5px -5px 10px #ffffff, 0 0 0 1.5px var(--color-weak);
+}
+
+.shake-error {
+  animation: neuShake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes neuShake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  15%, 45%, 75% {
+    transform: translateX(-6px);
+  }
+  30%, 60%, 90% {
+    transform: translateX(6px);
+  }
+}
+
+/* Field validation hints */
+.field-hint {
+  font-size: 10px;
+  min-height: 14px;
+  padding-left: 16px;
+  color: var(--text-muted);
+  font-style: italic;
+  transition: color 0.2s ease;
+}
+
+.field-hint.error {
+  color: var(--color-weak);
+}
+
+.field-hint.success {
+  color: var(--color-strong);
+}
+
+/* Strength Meter */
+.strength-meter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+  padding: 0 4px;
+}
+
+.strength-meter-track {
+  width: 100%;
+  height: 10px;
+  background-color: var(--bg-color);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: inset 2px 2px 5px var(--shadow-inset), inset -2px -2px 5px var(--shadow-light);
+}
+
+.strength-meter-bar {
+  height: 100%;
+  width: 0%;
+  border-radius: 6px;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.strength-meter-bar.weak {
+  width: 33.33%;
+  background-color: var(--color-weak);
+}
+
+.strength-meter-bar.medium {
+  width: 66.66%;
+  background-color: var(--color-medium);
+}
+
+.strength-meter-bar.strong {
+  width: 100%;
+  background-color: var(--color-strong);
+}
+
+.strength-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  padding: 0 2px;
+}
+
+.strength-label {
+  font-weight: 700;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.strength-label.weak {
+  color: var(--color-weak);
+}
+
+.strength-label.medium {
+  color: var(--color-medium);
+}
+
+.strength-label.strong {
+  color: var(--color-strong);
+}
+
+.strength-reqs {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.5;
+  color: var(--text-main);
+}
+
+/* Extruded Neumorphic Button - Sleek Interface */
+.btn-registry {
+  display: none;
+  width: 100%;
+  height: 50px;
+  margin-top: 8px;
+  background-color: var(--bg-color);
+  border: none;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-heading);
+  cursor: pointer;
+  outline: none;
+  box-shadow: 9px 9px 16px var(--shadow-dark), -9px -9px 16px var(--shadow-light);
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-registry:hover {
+  box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+  color: #1a1e20;
+}
+
+.btn-registry:active {
+  box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+  transform: translateY(1px);
+}
+
+/* Success State */
+.success-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  padding: 24px 10px;
+  gap: 20px;
+}
+
+.checkmark-circle-outer {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background-color: var(--bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+  box-shadow: 9px 9px 16px var(--shadow-dark), -9px -9px 16px var(--shadow-light);
+}
+
+.checkmark-svg {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: block;
+}
+
+.checkmark-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 3;
+  stroke-miterlimit: 10;
+  stroke: var(--color-strong);
+  fill: none;
+}
+
+.checkmark-check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  stroke-width: 4;
+  stroke: var(--color-strong);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+/* Animated Checkmark popup */
+.animate-popup .checkmark-circle-outer {
+  animation: popScale 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.animate-popup .checkmark-circle {
+  animation: strokeCircle 0.6s cubic-bezier(0.65, 0, 0.45, 1) 0.2s forwards;
+}
+
+.animate-popup .checkmark-check {
+  animation: strokeCheck 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+}
+
+.animate-popup .success-text {
+  animation: fadeInUp 0.5s ease-out 0.8s both;
+}
+
+/* Static checkmark (when animation has already played once in session) */
+.static-display .checkmark-circle {
+  stroke-dashoffset: 0;
+}
+
+.static-display .checkmark-check {
+  stroke-dashoffset: 0;
+}
+
+.static-display .success-text {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes popScale {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes strokeCircle {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes strokeCheck {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-text {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--text-heading);
+  line-height: 1.4;
+  max-width: 300px;
+}
+
+.reset-session-btn {
+  margin-top: 10px;
+  padding: 10px 22px;
+  background-color: var(--bg-color);
+  border: none;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-heading);
+  cursor: pointer;
+  box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+  transition: all 0.2s ease-in-out;
+}
+
+.reset-session-btn:hover {
+  color: #1a1e20;
+  box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+}
+
+.reset-session-btn:active {
+  box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .app-container {
+    padding: 28px 20px;
+    border-radius: 28px;
+  }
+}

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Strength Checker</title>
+    <meta
+      name="description"
+      content="A Neumorphism (Soft UI) real-time password strength checker with live validation, dynamic strength meter, and animated confirmation."
+    />
+    <meta property="og:title" content="Password Strength Checker" />
+    <meta
+      property="og:description"
+      content="A Neumorphism (Soft UI) real-time password strength checker with live validation, dynamic strength meter, and animated confirmation."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="app-container" id="app-container">
+      <!-- Registration Form Area -->
+      <section class="form-area" id="form-area">
+        <header class="header-area" id="header-area">
+          <h1 class="app-title" id="app-title">Member Registration</h1>
+          <p class="app-subtitle" id="app-subtitle">Real-time security verification</p>
+        </header>
+
+        <form class="form-container" id="registration-form" novalidate autocomplete="off">
+          <!-- Username Input -->
+          <div class="form-group" id="username-group">
+            <label for="username" class="form-label" id="username-label">
+              <span>Username</span>
+            </label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              class="neumorphic-input"
+              placeholder="Alphabetic only (e.g. Alex)"
+              autocomplete="off"
+              spellcheck="false"
+              required
+            />
+            <span class="field-hint" id="username-hint"></span>
+          </div>
+
+          <!-- Password Input & Strength Meter -->
+          <div class="form-group" id="password-group">
+            <label for="password" class="form-label" id="password-label">
+              <span>Password</span>
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="neumorphic-input"
+              placeholder="Enter your password"
+              autocomplete="new-password"
+              required
+            />
+            <!-- Visual Colored Bar Strength Meter -->
+            <div class="strength-meter-container" id="strength-meter-container">
+              <div class="strength-meter-track" id="strength-meter-track">
+                <div class="strength-meter-bar" id="strength-meter-bar"></div>
+              </div>
+              <div class="strength-status" id="strength-status">
+                <span class="strength-reqs" id="strength-reqs">Security Level</span>
+                <span class="strength-label" id="strength-label"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Re-enter Password Input -->
+          <div class="form-group" id="confirm-password-group">
+            <label for="confirm-password" class="form-label" id="confirm-password-label">
+              <span>Re-enter Password</span>
+            </label>
+            <input
+              type="password"
+              id="confirm-password"
+              name="confirm-password"
+              class="neumorphic-input"
+              placeholder="Re-enter password to match"
+              autocomplete="new-password"
+              required
+            />
+            <span class="field-hint" id="confirm-password-hint"></span>
+          </div>
+
+          <!-- Registry Submit Button (Hidden by default until validated) -->
+          <button type="submit" id="registry-button" class="btn-registry">
+            Registry
+          </button>
+        </form>
+      </section>
+
+      <!-- Success State (Hidden initially) -->
+      <section class="success-container" id="success-container" style="display: none;">
+        <div class="checkmark-circle-outer" id="checkmark-circle-outer">
+          <svg class="checkmark-svg" id="checkmark-svg" viewBox="0 0 52 52">
+            <circle class="checkmark-circle" id="checkmark-circle" cx="26" cy="26" r="23" />
+            <path class="checkmark-check" id="checkmark-check" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+          </svg>
+        </div>
+        <h2 class="success-text" id="success-text">Thanks for being a member</h2>
+        <button type="button" class="reset-session-btn" id="reset-session-btn">
+          Register Another
+        </button>
+      </section>
+    </main>
+  </body>
+</html>
+
