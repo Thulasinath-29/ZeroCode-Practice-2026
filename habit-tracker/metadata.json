@@ -1,0 +1,6 @@
+{
+  "name": "Habit Tracker",
+  "description": "Glassmorphism single page habit tracker with weekly progress, points, animated statistics graph, and local storage.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
